@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 10px;
+        margin: 0 auto;
+        background-color: black;
+      }
+
+      .box {
+        display: flex;
+        margin: 0;
+        background-color: white;
+        height: 25vh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container button {
+        font-size: 10em;
+      }
+
+      body {
+        text-align: center;
+      }
+
+      .rounds {
+        display: flex;
+        justify-content: space-around;
+        margin-top: -35px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button class="box" id="one" onclick="clickBox('one')"></button>
+      <button class="box" id="two" onclick="clickBox('two')"></button>
+      <button class="box" id="three" onclick="clickBox('three')"></button>
+
+      <button class="box" id="four" onclick="clickBox('four')"></button>
+      <button class="box" id="five" onclick="clickBox('five')"></button>
+      <button class="box" id="six" onclick="clickBox('six')"></button>
+
+      <button class="box" id="seven" onclick="clickBox('seven')"></button>
+      <button class="box" id="eight" onclick="clickBox('eight')"></button>
+      <button class="box" id="nine" onclick="clickBox('nine')"></button>
+    </div>
+
+    <h1 id="current">Current Turn: X</h1>
+
+    <div class="rounds">
+      <h2 id="xWins">X: 0</h2>
+      <h2 id="tieWins">Tie: 0</h2>
+      <h2 id="oWins">O: 0</h2>
+    </div>
+
+    <script>
+      let currentTurn = "X";
+      let clicked = [];
+      let winner = "none";
+      let button = [];
+      let moves = 0;
+
+      let xWins = 0;
+      let tieWins = 0;
+      let oWins = 0;
+
+      function clickBox(box) {
+        if (currentTurn == "X" && clicked[box] != true && winner == "none") {
+          document.getElementById(box).innerHTML = "X";
+          document.getElementById(box).style.color = "rgb(101, 13, 13)";
+          button[box] = currentTurn;
+          currentTurn = "O";
+          clicked[box] = true;
+          moves++;
+        } else if (
+          currentTurn == "O" &&
+          clicked[box] != true &&
+          winner == "none"
+        ) {
+          document.getElementById(box).innerHTML = "O";
+          document.getElementById(box).style.color = "rgb(16, 16, 99)";
+          button[box] = currentTurn;
+          currentTurn = "X";
+          clicked[box] = true;
+          moves++;
+        }
+        document.getElementById("current").innerHTML =
+          "Current Turn: " + currentTurn;
+
+        if (
+          button["one"] == "X" &&
+          button["two"] == "X" &&
+          button["three"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["four"] == "X" &&
+          button["five"] == "X" &&
+          button["six"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["seven"] == "X" &&
+          button["eight"] == "X" &&
+          button["nine"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["one"] == "X" &&
+          button["four"] == "X" &&
+          button["seven"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["two"] == "X" &&
+          button["five"] == "X" &&
+          button["eight"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["three"] == "X" &&
+          button["six"] == "X" &&
+          button["nine"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["one"] == "X" &&
+          button["five"] == "X" &&
+          button["nine"] == "X"
+        ) {
+          winner = "X won!";
+        } else if (
+          button["three"] == "X" &&
+          button["five"] == "X" &&
+          button["seven"] == "X"
+        ) {
+          winner = "X won!";
+        }
+
+        if (
+          button["one"] == "O" &&
+          button["two"] == "O" &&
+          button["three"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["four"] == "O" &&
+          button["five"] == "O" &&
+          button["six"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["seven"] == "O" &&
+          button["eight"] == "O" &&
+          button["nine"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["one"] == "O" &&
+          button["four"] == "O" &&
+          button["seven"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["two"] == "O" &&
+          button["five"] == "O" &&
+          button["eight"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["three"] == "O" &&
+          button["six"] == "O" &&
+          button["nine"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["one"] == "O" &&
+          button["five"] == "O" &&
+          button["nine"] == "O"
+        ) {
+          winner = "O won!";
+        } else if (
+          button["three"] == "O" &&
+          button["five"] == "O" &&
+          button["seven"] == "O"
+        ) {
+          winner = "O won!";
+        }
+
+        if (moves >= 9 && winner == "none") {
+          winner = "It's a tie!";
+        }
+
+        if (winner != "none") {
+          if (winner == "X won!") {
+            xWins++;
+            document.getElementById("xWins").innerHTML = "X: " + xWins;
+          } else if (winner == "O won!") {
+            oWins++;
+            document.getElementById("oWins").innerHTML = "O: " + oWins;
+          } else {
+            tieWins++;
+            document.getElementById("tieWins").innerHTML = "Tie: " + tieWins;
+          }
+
+          if (confirm(winner)) {
+            currentTurn = "X";
+            clicked["one"] = false;
+            clicked["two"] = false;
+            clicked["three"] = false;
+            clicked["four"] = false;
+            clicked["five"] = false;
+            clicked["six"] = false;
+            clicked["seven"] = false;
+            clicked["eight"] = false;
+            clicked["nine"] = false;
+            button["one"] = " ";
+            document.getElementById("one").innerHTML = button["one"];
+            button["two"] = " ";
+            document.getElementById("two").innerHTML = button["two"];
+            button["three"] = " ";
+            document.getElementById("three").innerHTML = button["three"];
+            button["four"] = " ";
+            document.getElementById("four").innerHTML = button["four"];
+            button["five"] = " ";
+            document.getElementById("five").innerHTML = button["five"];
+            button["six"] = " ";
+            document.getElementById("six").innerHTML = button["six"];
+            button["seven"] = " ";
+            document.getElementById("seven").innerHTML = button["seven"];
+            button["eight"] = " ";
+            document.getElementById("eight").innerHTML = button["eight"];
+            button["nine"] = " ";
+            document.getElementById("nine").innerHTML = button["nine"];
+            winner = "none";
+            moves = 0;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
